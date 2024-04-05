@@ -4,6 +4,10 @@
 
 name: Build and deploy Python app to Azure Web App - demotransferapi
 
+env:     # set this to the path to your path of working directory inside github repository, defaults to the repository root
+  PYTHON_VERSION: '3.9'        # set the version to use
+  STARTUP_COMMAND: ''           # set this to the startup command required to start the gunicorn server. default it is empty
+
 on:
   push:
     branches:
@@ -23,7 +27,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.9'
+          python-version: ${{ env.PYTHON_VERSION }}
       
       - name: Install dependencies
         run: | 
